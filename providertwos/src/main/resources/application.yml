@@ -1,0 +1,49 @@
+server:
+  port: 8088
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8080/eureka/
+#jdbc
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    #数据库url
+    url: jdbc:mysql://localhost:3306/testsql?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=GMT%2B8&useSSL=false
+    # 数据库访问账户
+    username: root
+    # 数据库访问密码
+    password: 123456
+    dbcp2:                                          # 进行数据库连接池的配置
+      min-idle: 5                                  # 数据库连接池的最小维持连接数
+      initial-size: 5                               # 初始化提供的连接数
+      max-total: 5                                # 最大的连接数
+      max-wait-millis: 60000
+
+#redis集群
+redis:
+    # redis数据库索引(默认为0)，我们使用索引为3的数据库，避免和其他数据库冲突
+    database: 0
+    # redis服务器地址（默认为loaclhost）
+    host: loaclhost
+    # redis端口（默认为6379）
+    post: 6379
+    # redis访问密码（默认为空）
+    password:
+    # redis连接超时时间（单位毫秒）
+    timeout: 10000
+    # redis连接池配置
+    pool:
+      max-active: 8				# 等待连接获取的最大超时时间
+      max-idle: 8          # 最大空闲连接数（默认为8，负数表示无限）
+      min-idle: 0   # 最小空闲连接数（默认为0，该值只有为正数才有用）
+      max-wait: -1 # 从连接池中获取连接最大等待时间（默认为-1，单位为毫秒，负数表示无限）
+mybatis:
+  typeAliasesPackage: com.providertwos.entity #实体类包路径
+  mapperLocations: classpath:mapper/*.xml #mapper.xml路径
+
+
+
+
+
+

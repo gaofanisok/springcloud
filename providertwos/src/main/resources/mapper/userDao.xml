@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.providertwos.dao.UserDao">
+    <select id="getUserById"  resultType="com.providertwos.entity.User">
+        select * from user where
+        <if test="id !=null">
+            id=#{id}
+     </if>
+
+</select>
+    <select id="findAllUser"  resultType="com.providertwos.entity.User">
+       select * from user
+        <if test="name !='' and name !=null">
+           where  name like CONCAT ('%',#{name},'%')
+        </if>
+        order by id limit #{pageIndex},#{pageSize}
+    </select>
+
+
+</mapper>
