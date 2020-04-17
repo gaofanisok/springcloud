@@ -42,7 +42,12 @@ mybatis:
   typeAliasesPackage: com.providertwos.entity #实体类包路径
   mapperLocations: classpath:mapper/*.xml #mapper.xml路径
 
-
+#分页插件
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
 
 
 

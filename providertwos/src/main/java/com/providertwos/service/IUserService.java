@@ -3,8 +3,6 @@ package com.providertwos.service;
 import com.providertwos.entity.User;
 
 import java.util.List;
-import java.util.Map;
-
 public interface IUserService {
     /**
      * 新增用户
@@ -33,4 +31,5 @@ public interface IUserService {
     public String getUserById(int id);
 
     public Boolean getUserIsok(String name,int id);
+    public String findUserInid();
 }

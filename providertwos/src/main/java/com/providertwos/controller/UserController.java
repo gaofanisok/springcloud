@@ -1,16 +1,23 @@
 package com.providertwos.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.providertwos.entity.User;
+import com.providertwos.manager.UserManager;
 import com.providertwos.service.IUserService;
-import org.apache.ibatis.annotations.Param;
+import com.providertwos.util.CommonUtil;
+import com.providertwos.util.RequestUtil;
+import com.providertwos.util.StringUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,8 +28,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+    private static Log logger = LogFactory.getLog(UserController.class);
     @Autowired
     private IUserService iUserService;
+    @Resource
+    UserManager userManager;
     @RequestMapping("/userList")
     public List getUserList( HttpServletRequest request){
         int pageIndex =Integer.valueOf(request.getParameter("pageIndex")) ;
@@ -46,7 +56,15 @@ public class UserController {
             return "error";
         }
     }
-//    @RequestMapping("/delUser")
+    @RequestMapping("/findUserInid")
+    public String findUserInid(){
+        List<Integer> list1=new ArrayList<>();
+        list1.add(1);
+        list1.add(2);
+        list1.add(3);
+        return iUserService.findUserInid();
+    }
+    //    @RequestMapping("/delUser")
 //    public String delUser(@RequestParam int id){
 //        try {
 //            iUserService.delUser(id);
@@ -66,6 +84,29 @@ public class UserController {
 //            return "update false";
 //
 //        }
+//    }
+//    @RequestMapping(value = "showUser", method = RequestMethod.POST)
+//    public Object selectUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//        try {
+//            String id=RequestUtil.getString(request, "pkid");
+//            int pageIndex=RequestUtil.getInt(request,"pageIndex",1);
+//            int pageSize=RequestUtil.getInt(request,"pageSize",5);
+//            String user=userManager.getPageInfo(id,pageIndex,pageSize);
+//
+//
+//
+//            if (StringUtil.isNotEmpty(user)) {
+//                return  CommonUtil.toReturnJsonMsg(0, "成功",user);
+//            } else {
+//                return CommonUtil.toReturnJsonMsg(1, "数据错误：获取数据失败！");
+//            }
+//        } catch (Exception e) {
+//            logger.error(e);
+//            e.printStackTrace();
+//        }
+//        return CommonUtil.toReturnJsonMsg(-1, "系统繁忙，请重试");
+//
+//
 //    }
 
 

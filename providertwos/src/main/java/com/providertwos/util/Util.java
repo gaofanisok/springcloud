@@ -5,17 +5,20 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.providertwos.dao.CommunalDao;
 
+import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
- * @Auther: Administrator
+ * @Auther: gaofan
  * @Date: 2020/4/15 0015 15 11
- * @Description:
+ * @Description: 工具类
  */
 public  class Util {
     /**
@@ -117,5 +120,15 @@ public  class Util {
             return sdf.format(date);
         }
         return "";
+    }
+
+    public  static  List<Map<String,Object>> queryStudentsByArray(int pageIndex, int pageSize,String sql, List<Map<String,Object>> list) {
+        //查询全部数据
+        List<Map<String,Object>> students =list;
+        //从第几条数据开始
+        int firstIndex = (pageIndex - 1) * pageSize;
+        //到第几条数据结束
+        int lastIndex = pageIndex * pageSize;
+        return students.subList(firstIndex, lastIndex); //直接在list中截取
     }
 }

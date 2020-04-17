@@ -46,4 +46,11 @@ public interface UserDao {
      */
    @Select("select * from user where name=#{name} and id=#{id}")
     List<User> getUserIsok(@Param("name")String name,@Param("id")int id);
+
+    List<User> findUserInid(@Param("list") List<Integer> list);
+
+    //查询通用
+    List<Map<String,Object>> query(Map map);
+    //添加删除通用
+    void execute(Map map);
 }

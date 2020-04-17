@@ -17,6 +17,22 @@
         </if>
         order by id limit #{pageIndex},#{pageSize}
     </select>
+    <select id="findUserInid"  resultType="com.providertwos.entity.User">
+        select * from user
+       <where>
+           id in
+           <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+           #{item}
+           </foreach>
+       </where>
+    </select>
+    <select id="query" resultType="java.util.HashMap" parameterType="java.util.Map">
+       ${sql};
+    </select>
+    <update id="execute" parameterType="java.util.Map" >
+		${sql}
+	</update>
+
 
 
 </mapper>

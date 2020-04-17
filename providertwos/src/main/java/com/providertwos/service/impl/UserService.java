@@ -86,4 +86,29 @@ public class UserService implements IUserService {
             return false;
         }
     }
+
+    @Override
+    public String findUserInid() {
+
+        JSONObject jb=new JSONObject();
+        List<Integer> list =new ArrayList<>();
+        JSONArray ja=new JSONArray();
+
+        list.add(1);
+        list.add(2);
+        List<User> userList=userDao.findUserInid(list);
+        if (userList.size()>0){
+            for (int i=0;i<userList.size();i++){
+                Map<String,Object> map=new HashMap<>();
+                User user=userList.get(i);
+                map.put("id",user.getId());
+                map.put("name",user.getName());
+                map.put("birthday",Util.dateToString(user.getBirthday(),"yyyy-MM-dd HH:mm:ss"));
+                map.put("address",user.getAddress());
+                ja.add(map);
+            }
+            jb.put("data",ja);
+        }
+        return jb.toString();
+    }
 }
