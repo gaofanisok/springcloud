@@ -26,7 +26,7 @@ public  class Util {
     /**
      * token私密钥匙
      */
-    private static  final String TOKEN="0cf92441214a4d9c811580b2b457018c;";
+    private static  final String TOKEN="0cf92441214a4d9c811580b2b457018c";
 
     /**
      *<pre>
