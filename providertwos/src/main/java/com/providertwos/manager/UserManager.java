@@ -4,7 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.providertwos.dao.CommunalDao;
 
-import com.providertwos.util.PageRequest;
+import com.providertwos.util.PageUtil;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -31,13 +32,26 @@ public class UserManager {
      * @return java.lang.String
      *</pre>
      */
-    public String seleuser(String pkid,int pageIndex,int pageSize){
+    public String seleuser(int pageIndex,int pageSize){
         PageHelper.startPage(pageIndex,pageSize);
         JSONObject js=new JSONObject();
-        String sql="select * from user ";
-        List<Map<String,Object>> list=communalDao.query(sql);
-        if (list.size()>0){
-            js.put("username",list.get(0).getOrDefault("name",""));
+        JSONArray ja=new JSONArray();
+        String sql="Select * FROM user ";
+        PageInfo<Map<String,Object>> pageList=PageUtil.PageQuery(pageIndex,pageSize,communalDao.queryPage(sql));
+        if (pageList.getSize()>0){
+            List<Map<String,Object>> list=pageList.getList();
+            for (int i=0;i<list.size();i++){
+                JSONObject js2=new JSONObject();
+                Map<String,Object> maps=list.get(i);
+                js2.put("id",maps.getOrDefault("id",""));
+                js2.put("name",maps.getOrDefault("name",""));
+                js2.put("birthday",maps.getOrDefault("birthday","")+"");
+                js2.put("address",maps.getOrDefault("address",""));
+                ja.add(js2);
+            }
+
+            js.put("data",ja);
+            js.put("total",pageList.getTotal());
             return js.toString();
         }
 

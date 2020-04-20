@@ -45,7 +45,7 @@ mybatis:
 #分页插件
 pagehelper:
     helperDialect: mysql
-    reasonable: true
+    reasonable: false #关闭合理化否则没数据会返回最后一条数据
     supportMethodsArguments: true
     params: count=countSql
 

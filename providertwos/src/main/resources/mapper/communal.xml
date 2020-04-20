@@ -7,7 +7,7 @@
        ${sql};
     </select>
     <select id="queryPage" resultType="java.util.HashMap" parameterType="String">
-       ${sql};
+       ${sql}
     </select>
     <update id="execute" parameterType="String" >
 		${sql}

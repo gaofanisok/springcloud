@@ -85,29 +85,25 @@ public class UserController {
 //
 //        }
 //    }
-//    @RequestMapping(value = "showUser", method = RequestMethod.POST)
-//    public Object selectUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        try {
-//            String id=RequestUtil.getString(request, "pkid");
-//            int pageIndex=RequestUtil.getInt(request,"pageIndex",1);
-//            int pageSize=RequestUtil.getInt(request,"pageSize",5);
-//            String user=userManager.getPageInfo(id,pageIndex,pageSize);
-//
-//
-//
-//            if (StringUtil.isNotEmpty(user)) {
-//                return  CommonUtil.toReturnJsonMsg(0, "成功",user);
-//            } else {
-//                return CommonUtil.toReturnJsonMsg(1, "数据错误：获取数据失败！");
-//            }
-//        } catch (Exception e) {
-//            logger.error(e);
-//            e.printStackTrace();
-//        }
-//        return CommonUtil.toReturnJsonMsg(-1, "系统繁忙，请重试");
-//
-//
-//    }
+        @RequestMapping(value = "showUser", method = RequestMethod.POST)
+    public Object selectUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+
+            int pageIndex=RequestUtil.getInt(request,"pageIndex",1);
+            int pageSize=RequestUtil.getInt(request,"pageSize",5);
+            String user=userManager.seleuser(pageIndex,pageSize);
+            if (StringUtil.isNotEmpty(user)) {
+                return  CommonUtil.toReturnJsonMsg(0, "成功",user);
+            } else {
+                return CommonUtil.toReturnJsonMsg(1, "数据错误：获取数据失败！");
+            }
+        } catch (Exception e) {
+            logger.error(e);
+            e.printStackTrace();
+        }
+        return CommonUtil.toReturnJsonMsg(-1, "系统繁忙，请重试");
+
+    }
 
 
 }
