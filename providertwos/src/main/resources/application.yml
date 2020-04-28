@@ -6,6 +6,8 @@ eureka:
       defaultZone: http://localhost:8080/eureka/
 #jdbc
 spring:
+  application:
+    name: provide
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     #数据库url
